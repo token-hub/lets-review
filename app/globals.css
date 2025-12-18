@@ -127,3 +127,7 @@
 .wrapper {
     @apply max-w-7xl lg:mx-auto p-5 md:px-10 w-full;
 }
+
+.h-minus-header {
+    @apply h-[calc(100vh-77px)];
+}

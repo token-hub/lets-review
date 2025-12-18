@@ -20,7 +20,9 @@ const Header = () => {
 
                     <div className="hidden md:flex items-center">
                         <ModeToggle />
-                        <Button className="ml-2">Sign In</Button>
+                        <Link href="/sign-in">
+                            <Button className="ml-2 hover:cursor-pointer">Sign In</Button>
+                        </Link>
                     </div>
                 </div>
             </div>
