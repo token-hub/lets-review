@@ -8,10 +8,12 @@ import { SearchCode } from "lucide-react";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 import { signUpSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpDefaultValues } from "@/lib/constants";
+import { signUp } from "@/lib/actions/signUp.actions";
+import { redirect } from "next/navigation";
 
 const SignUp = () => {
     const {
@@ -26,13 +28,17 @@ const SignUp = () => {
 
     const onSubmit: SubmitHandler<z.infer<typeof signUpSchema>> = async (data) => {
         try {
-            console.log(data);
-            // do server action here
+            const result = await signUp(data);
+
+            if (result.success) {
+                redirect("/");
+            }
         } catch (err) {
-            // modify the error as needed
-            setError("email", {
-                message: "something went wrong",
-            });
+            if (err instanceof Error) {
+                setError("root", { message: err.message });
+            } else {
+                setError("root", { message: "Something went wrong" });
+            }
         }
     };
 
@@ -81,6 +87,8 @@ const SignUp = () => {
                                 <Input {...register("confirmPassword")} type="password" placeholder="********" />
                                 {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
                             </div>
+
+                            {errors.root && <div className="text-sm text-destructive">{errors.root.message}</div>}
                         </div>
                     </CardContent>
                     <CardFooter className="flex-col gap-2">
