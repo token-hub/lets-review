@@ -72,7 +72,7 @@ const SignUp = () => {
                             {isSubmitting && <Spinner />} Login
                         </Button>
 
-                        <Link href="/sign-in" className="text-sm text-center text-muted-foreground">
+                        <Link href="/sign-up" className="text-sm text-center text-muted-foreground">
                             {"don't have an account?"} <span className="text-yellow-500 font-bold">Sign Up</span>
                         </Link>
                     </CardFooter>
