@@ -12,6 +12,8 @@ import { z } from "zod";
 import { signInSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInDefaultValues } from "@/lib/constants";
+import { redirect } from "next/navigation";
+import { signInWithCredentials } from "@/lib/actions/signUp.actions";
 
 const SignUp = () => {
     const {
@@ -26,13 +28,17 @@ const SignUp = () => {
 
     const onSubmit: SubmitHandler<z.infer<typeof signInSchema>> = async (data) => {
         try {
-            console.log(data);
-            // do server action here
+            const result = await signInWithCredentials(data);
+
+            if (result.success) {
+                redirect("/");
+            }
         } catch (err) {
-            // modify the error as needed
-            setError("email", {
-                message: "something went wrong",
-            });
+            if (err instanceof Error) {
+                setError("root", { message: err.message });
+            } else {
+                setError("root", { message: "Something went wrong" });
+            }
         }
     };
 
@@ -45,7 +51,7 @@ const SignUp = () => {
                         <Link href="/" className="hover:cursor-pointer">
                             <SearchCode className="w-18 h-18 m-0 text-yellow-500" />
                         </Link>
-                        <CardTitle className="text-center text-2xl">Sign Up</CardTitle>
+                        <CardTitle className="text-center text-2xl">Sign In</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="flex flex-col gap-6">
@@ -65,6 +71,7 @@ const SignUp = () => {
                                 <Input {...register("password")} type="password" placeholder="********" />
                                 {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
                             </div>
+                            {errors.root && <div className="text-sm text-destructive">{errors.root.message}</div>}
                         </div>
                     </CardContent>
                     <CardFooter className="flex-col gap-2">

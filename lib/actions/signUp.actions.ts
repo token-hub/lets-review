@@ -5,10 +5,10 @@ import { BYCRYPT_SALT } from "@/lib/constants";
 import { prisma } from "@/db/prisma";
 import bcrypt from "bcrypt";
 import { signIn } from "@/auth";
-import { SignUp } from "@/types";
+import { SignUpType, SignInType } from "@/types";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 
-export async function signUp(data: SignUp) {
+export async function signUp(data: SignUpType) {
     try {
         const user = signUpSchema.parse(data);
 
@@ -54,18 +54,21 @@ export async function signUp(data: SignUp) {
     }
 }
 
-export async function signInWithCredentials(formData: FormData) {
+export async function signInWithCredentials(data: SignInType) {
     try {
-        signInSchema.parse({
-            email: formData.get("email"),
-            password: formData.get("password"),
-        });
+        signInSchema.parse(data);
 
         // signIn user
-        await signIn("credentials", formData);
+        await signIn("credentials", {
+            redirectTo: "/",
+            ...data,
+        });
 
         return { success: true, message: "User authenticated" };
     } catch (error) {
-        throw error;
+        if (isRedirectError(error)) {
+            throw error;
+        }
+        throw new Error("Invalid credentials");
     }
 }
