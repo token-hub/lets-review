@@ -76,7 +76,7 @@ export async function signInWithCredentials(data: SignInType) {
 
 export async function signOutUser() {
     try {
-        await signOut();
+        await signOut({ redirect: false });
         redirect("/sign-in");
     } catch (error) {
         throw error;
