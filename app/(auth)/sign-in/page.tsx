@@ -13,7 +13,7 @@ import { signInSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInDefaultValues } from "@/lib/constants";
 import { redirect } from "next/navigation";
-import { signInWithCredentials } from "@/lib/actions/signUp.actions";
+import { signInWithCredentials } from "@/lib/actions/user.actions";
 
 const SignUp = () => {
     const {

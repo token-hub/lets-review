@@ -12,7 +12,7 @@ import { z, ZodError } from "zod";
 import { signUpSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpDefaultValues } from "@/lib/constants";
-import { signUp } from "@/lib/actions/signUp.actions";
+import { signUp } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 
 const SignUp = () => {
