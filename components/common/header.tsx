@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { ModeToggle } from "./ModeToggle";
 import { Button } from "@/components/ui/button";
 import { SearchCode } from "lucide-react";
 import { MobileMenu } from "./mobileMenu";
+import { DesktopMenu } from "./desktopMenu";
 import { auth } from "@/auth";
-import { signOutUser } from "@/lib/actions/user.actions";
 
 const Header = async () => {
     const session = await auth();
@@ -23,16 +22,16 @@ const Header = async () => {
                     <MobileMenu />
 
                     <div className="hidden md:flex items-center">
-                        <ModeToggle />
-
                         {session?.user ? (
                             <>
-                                <p>{session?.user.name}</p>
-                                <button onClick={signOutUser}>SignOut</button>
+                                <DesktopMenu />
                             </>
                         ) : (
                             <Link href="/sign-in">
-                                <Button className="ml-2 border bg-yellow-500 hover:cursor-pointer hover:border-yellow-500 hover:bg-white hover:text-yellow-500">
+                                <Button
+                                    className="ml-2 border text-white bg-yellow-500 hover:cursor-pointer hover:border-yellow-500 hover:bg-white hover:text-yellow-500 dark:bg-yellow-500  dark:border-yellow-400
+    dark:hover:bg-yellow-400 dark:hover:text-white"
+                                >
                                     Sign In
                                 </Button>
                             </Link>
