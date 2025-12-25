@@ -9,7 +9,7 @@ const Topics = ({ topics = [] }: TopicsProps) => {
                 return (
                     <div
                         key={topic}
-                        className="w-40 h-40 p-3 flex items-center justify-center text-center break-all text-2xl font-bold border rounded-lg shadow-lg hover:shadow-md active:shadow-sm cursor-pointer transition duration-75"
+                        className="w-40 h-40 p-3 flex  items-center justify-center text-center break-all text-2xl font-bold border rounded-lg shadow-lg hover:shadow-md active:shadow-sm cursor-pointer transition duration-75 hover:text-yellow-500 hover:border-yellow-500"
                     >
                         {topic}
                     </div>
