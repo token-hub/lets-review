@@ -11,3 +11,7 @@ export const signInDefaultValues = {
     email: "",
     password: "",
 };
+
+export const questionsCountDefaultValue = [10, 15, 30, 100];
+
+export const boxOwner = ["topics", "questionCount"] as const;
