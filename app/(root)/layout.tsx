@@ -1,4 +1,5 @@
 import Header from "@/components/common/header";
+import ProgressProvider from "@/providers/progressProvider";
 
 const RootLayout = ({
     children,
@@ -6,10 +7,12 @@ const RootLayout = ({
     children: React.ReactNode;
 }>) => {
     return (
-        <div className="h-dvh">
-            <Header />
-            {children}
-        </div>
+        <ProgressProvider>
+            <div className="h-dvh">
+                <Header />
+                {children}
+            </div>
+        </ProgressProvider>
     );
 };
 
