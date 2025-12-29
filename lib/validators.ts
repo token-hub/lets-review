@@ -16,3 +16,11 @@ export const signUpSchema = signInSchema
         message: "Passwords don't match",
         path: ["confirmPassword"],
     });
+
+// Schema for create progress
+export const createProgressSchema = z.object({
+    userId: z.string(),
+    selectedTopicId: z.string(),
+    questionCount: z.number(),
+    isGuest: z.boolean(),
+});
