@@ -58,6 +58,14 @@ const config = {
             },
         }),
     ],
+    callbacks: {
+        async session({ session, user, trigger, token }: any) {
+            // Set the user ID from the token
+            session.user.id = token.sub;
+
+            return session;
+        },
+    },
 } satisfies NextAuthConfig;
 
 export const { handlers, signIn, signOut, auth } = NextAuth(config);
