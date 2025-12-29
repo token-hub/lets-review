@@ -29,6 +29,8 @@ export const getProgressSchema = z.object({
     userId: z.string(),
 });
 
+export const getTopicsSchema = getProgressSchema;
+
 export const getProgressQuestionSchema = z.object({
     currentQuestionId: z.string(),
 });
