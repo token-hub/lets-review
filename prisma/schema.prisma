@@ -124,5 +124,5 @@ model ProgressAnswer {
   selectedAnswerId String
 
   question Question @relation(fields: [questionId], references: [id])
-  progress Progress @relation(fields: [progressId], references: [id])
+  progress Progress @relation(fields: [progressId], references: [id], onDelete: Cascade)
 }
