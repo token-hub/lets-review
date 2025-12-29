@@ -24,3 +24,11 @@ export const createProgressSchema = z.object({
     questionCount: z.number(),
     isGuest: z.boolean(),
 });
+
+export const getProgressSchema = z.object({
+    userId: z.string(),
+});
+
+export const getProgressQuestionSchema = z.object({
+    currentQuestionId: z.string(),
+});
